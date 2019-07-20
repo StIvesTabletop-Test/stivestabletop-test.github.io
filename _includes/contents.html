@@ -1,0 +1,43 @@
+<!-- Note: This may get slow if we have a huge number of pages! -->
+
+<!-- Make a CSV list of all the paths in the site -->
+{% assign wpaths = "/" %}
+{% for node in site.html_pages %}
+    {% unless wpaths contains node.dir %}
+        {%- assign wpaths = wpaths | append: "," | append: node.dir -%}
+    {% endunless %}
+{% endfor %}
+
+<!-- Change the paths list into an array -->
+{% assign wpaths = wpaths | split: "," %}
+
+<!-- Create a HTML list of sub-items under each path -->
+<ul class="menu">
+{% for wpath in wpaths %}
+	<!-- First the menu heading -->
+	<li class="menu_head"><a href={{wpath}}>
+    {% if wpath == "/" %}
+        Home <span class="caret"></span>
+    {% else %}
+    	{{wpath | remove: "/"}} <span class="caret"></span>
+    {% endif %}
+    </a>
+    <!-- Next the list of menu items -->
+    <div>
+    <ul class="menu_sub">
+    {% for node in site.html_pages %}
+    	{% if node.dir == wpath %}
+    		<!-- Check for the selected item -->
+			{% if page.url == node.url %}
+				{% assign class = "menu_selected" %}
+			{% else %}
+				{% assign class = "menu_item" %}
+			{% endif %}
+    		<li class = {{class}}><a href = {{node.url}}>{{node.title}}</a></li>
+    	{% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+    </li>
+{% endfor %}
+</ul>
