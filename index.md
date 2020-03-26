@@ -30,15 +30,11 @@ The next virtual session will be:
 
 See the [calendar](/Calendar.html) for the following sessions (which will be virtual until further notice).
 
-![Poster](/images/Poster_OnHiatus.png){:class="img_poster"}
-
-{% comment %}
 ![Poster](/images/{{ site.data.SessionInformation.NextSessionDate | date: "%Y_%m_%d"}}_Poster.png "Next Session: {% case d %}
 	{%- when "1" or "21" or "31" %}{{ d }}st
 	{%- when "2" or "22" %}{{ d }}nd
 	{%- when "3" or "23" %}{{ d }}rd
 	{%- else %}{{ d }}th
 {%- endcase %} {{ site.data.SessionInformation.NextSessionDate | date: "%B %Y" }}"){:class="img_poster"}
-{% endcomment %}
 
 [Discord]: https://discord.gg/bScV82f
